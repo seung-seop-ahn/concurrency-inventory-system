@@ -12,6 +12,7 @@ $ docker-compose up -d
 ## Problem & Solution 1
 
 - Race condition (stock update)
+- `synchronized`
 
 ## Author
 

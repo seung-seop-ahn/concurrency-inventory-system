@@ -16,12 +16,10 @@ public class StockService {
 		this.stockRepository = stockRepository;
 	}
 
-	@Transactional
-	public void decrease(Long id, Long quantity) {
+	public synchronized void decrease(Long id, Long quantity) {
 		Stock stock = this.stockRepository.findById(id).orElseThrow();
 		stock.decrease(quantity);
 
 		this.stockRepository.saveAndFlush(stock);
-
 	}
 }
