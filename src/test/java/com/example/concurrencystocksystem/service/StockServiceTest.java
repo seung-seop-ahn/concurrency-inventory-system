@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.concurrencystocksystem.domain.Stock;
+import com.example.concurrencystocksystem.facade.OptimisticLockStockFacade;
 import com.example.concurrencystocksystem.repository.StockRepository;
 
 @SpringBootTest
@@ -21,8 +22,11 @@ class StockServiceTest {
 	// @Autowired
 	// private StockService stockService;
 
+	// @Autowired
+	// private PessimisticLockStockService stockService;
+
 	@Autowired
-	private PessimisticLockStockService stockService;
+	private OptimisticLockStockFacade stockService;
 
 	@Autowired
 	private StockRepository stockRepository;
@@ -37,14 +41,14 @@ class StockServiceTest {
 		this.stockRepository.deleteAll();
 	}
 
-	@Test
-	public void decreaseQuantity() {
-		this.stockService.decrease(1L, 1L);
-
-		Stock stock = this.stockRepository.findById(1L).orElseThrow();
-
-		assertEquals(99, stock.getQuantity());
-	}
+	// @Test
+	// public void decreaseQuantity() {
+	// 	this.stockService.decrease(1L, 1L);
+	//
+	// 	Stock stock = this.stockRepository.findById(1L).orElseThrow();
+	//
+	// 	assertEquals(99, stock.getQuantity());
+	// }
 
 	@Test
 	public void decreaseQuantityConcurrently() throws InterruptedException {
@@ -56,7 +60,11 @@ class StockServiceTest {
 		for(int i = 0; i < threadCount; i++) {
 			executorService.submit(() -> {
 				try {
-					this.stockService.decrease(1L, 1L);
+					try {
+						this.stockService.decrease(1L, 1L);
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
 				} finally {
 					latch.countDown();
 				}

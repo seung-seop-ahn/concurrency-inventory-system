@@ -24,6 +24,11 @@ $ docker-compose up -d
   - If collisions occur frequently, better performance than Optimistic Lock.
   - Guarantee data consistency.
   - Performance may decrease.
+- Optimistic Lock
+  - Use versioning technique. So requires version column.
+  - Performance advantage by not holding a lock.
+  - The hassle of having to write your own retry logic when an update fails.
+  - Recommended when conflicts do not occur frequently.
 
 ## Author
 
