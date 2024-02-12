@@ -46,11 +46,15 @@ $ docker-compose up -d
     - A method of attempting to acquire a lock by repeatedly checking whether it's available.
     - It can put a load on Redis. Therefore, it is better to give time to acquire the lock.
   - Requires retry logic.
+  - Used for locks that do not require retry.
   - ![](./docs/images/lettuce.png)
 - Redisson
   - Pub-Sub (= Channel)
   - Don't need retry logic.
+  - Used for locks that require retry.
   - ![](./docs/images/redisson.png)
+
+
 
 ## Author
 
