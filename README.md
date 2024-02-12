@@ -15,6 +15,12 @@ $ docker-compose up -d
 - `synchronized`
   - `@Transactional` can also cause race condition. So must remove before using it.
 
+## Problem & Solution 2
+
+- Race condition
+  - The `synchronized` keyword is guaranteed only within one process. 
+  - If there is only one server, this is fine, but if there are multiple servers, access to the data occurs from multiple places.
+
 ## Author
 
 👤 **Kevin Ahn**
