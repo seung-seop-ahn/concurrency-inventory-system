@@ -38,6 +38,16 @@ $ docker-compose up -d
   - In reality implementation maybe complicated.
   - ![](./docs/images/named-lock.png)
 
+## Problem & Solution 3
+
+- Lettuce (named lock)
+  - `setnx` (= Set if not exists)
+  - Spin lock
+    - A method of attempting to acquire a lock by repeatedly checking whether it's available.
+    - It can put a load on Redis. Therefore, it is better to give time to acquire the lock.
+  - Requires retry logic.
+  - ![](./docs/images/lettuce.png)
+
 ## Author
 
 👤 **Kevin Ahn**

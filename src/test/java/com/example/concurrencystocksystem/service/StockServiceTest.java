@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.concurrencystocksystem.domain.Stock;
+import com.example.concurrencystocksystem.facade.LettuceLockStockFacade;
 import com.example.concurrencystocksystem.facade.NamedLockStockFacade;
 import com.example.concurrencystocksystem.facade.OptimisticLockStockFacade;
 import com.example.concurrencystocksystem.repository.StockRepository;
@@ -29,8 +30,11 @@ class StockServiceTest {
 	// @Autowired
 	// private OptimisticLockStockFacade stockService;
 
+	// @Autowired
+	// private NamedLockStockFacade stockService;
+
 	@Autowired
-	private NamedLockStockFacade stockService;
+	private LettuceLockStockFacade stockService;
 
 	@Autowired
 	private StockRepository stockRepository;
@@ -65,6 +69,8 @@ class StockServiceTest {
 			executorService.submit(() -> {
 				try {
 					this.stockService.decrease(1L, 1L);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
 				} finally {
 					latch.countDown();
 				}
