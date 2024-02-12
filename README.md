@@ -6,20 +6,10 @@
 ## Install
 
 ```sh
-$ docker-compuse up -d
+$ docker-compose up -d
 ```
 
-## Usage
-
-```sh
-usage
-```
-
-## Run tests
-
-```sh
-test
-```
+## Problem & Solution 1
 
 ## Author
 
