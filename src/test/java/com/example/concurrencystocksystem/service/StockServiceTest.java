@@ -16,6 +16,7 @@ import com.example.concurrencystocksystem.domain.Stock;
 import com.example.concurrencystocksystem.facade.LettuceLockStockFacade;
 import com.example.concurrencystocksystem.facade.NamedLockStockFacade;
 import com.example.concurrencystocksystem.facade.OptimisticLockStockFacade;
+import com.example.concurrencystocksystem.facade.RedissonLockStockFacade;
 import com.example.concurrencystocksystem.repository.StockRepository;
 
 @SpringBootTest
@@ -33,8 +34,11 @@ class StockServiceTest {
 	// @Autowired
 	// private NamedLockStockFacade stockService;
 
+	// @Autowired
+	// private LettuceLockStockFacade stockService;
+
 	@Autowired
-	private LettuceLockStockFacade stockService;
+	private RedissonLockStockFacade stockService;
 
 	@Autowired
 	private StockRepository stockRepository;
@@ -69,8 +73,6 @@ class StockServiceTest {
 			executorService.submit(() -> {
 				try {
 					this.stockService.decrease(1L, 1L);
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
 				} finally {
 					latch.countDown();
 				}

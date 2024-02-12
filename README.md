@@ -47,6 +47,10 @@ $ docker-compose up -d
     - It can put a load on Redis. Therefore, it is better to give time to acquire the lock.
   - Requires retry logic.
   - ![](./docs/images/lettuce.png)
+- Redisson
+  - Pub-Sub (= Channel)
+  - Don't need retry logic.
+  - ![](./docs/images/redisson.png)
 
 ## Author
 
