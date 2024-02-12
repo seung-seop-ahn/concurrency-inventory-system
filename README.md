@@ -29,6 +29,14 @@ $ docker-compose up -d
   - Performance advantage by not holding a lock.
   - The hassle of having to write your own retry logic when an update fails.
   - Recommended when conflicts do not occur frequently.
+- Named Lock
+  - The lock is not automatically released when the transaction ends, so the lock is released only with a command or when the preemption time expires.
+  - If the same data source is used, the connection pool may become insufficient, so it is actually recommended to use separate data sources.
+  - Mainly used when implementing distributed lock.
+  - Easy to implement timeout.
+  - Guarantee data consistency.
+  - In reality implementation maybe complicated.
+  - ![](./docs/images/named-lock.png)
 
 ## Author
 
