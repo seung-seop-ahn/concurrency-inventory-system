@@ -20,6 +20,10 @@ $ docker-compose up -d
 - Race condition
   - The `synchronized` keyword is guaranteed only within one process. 
   - If there is only one server, this is fine, but if there are multiple servers, access to the data occurs from multiple places.
+- Pessimistic Lock
+  - If collisions occur frequently, better performance than Optimistic Lock.
+  - Guarantee data consistency.
+  - Performance may decrease.
 
 ## Author
 

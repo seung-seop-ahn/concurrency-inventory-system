@@ -18,8 +18,11 @@ import com.example.concurrencystocksystem.repository.StockRepository;
 @SpringBootTest
 class StockServiceTest {
 
+	// @Autowired
+	// private StockService stockService;
+
 	@Autowired
-	private StockService stockService;
+	private PessimisticLockStockService stockService;
 
 	@Autowired
 	private StockRepository stockRepository;
