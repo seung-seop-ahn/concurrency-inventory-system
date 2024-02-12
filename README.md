@@ -13,6 +13,7 @@ $ docker-compose up -d
 
 - Race condition (stock update)
 - `synchronized`
+  - `@Transactional` can also cause race condition. So must remove before using it.
 
 ## Author
 
